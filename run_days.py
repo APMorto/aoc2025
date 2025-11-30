@@ -6,7 +6,6 @@ from parser.parser import read_grid, read_list_grid, read_line, read_line_blocks
 
 import template.template
 
-
 day_information = {
 # # DAY: (p1, p2, input_fn, [input_fn2], "dir")
     0: (template.template.part1, template.template.part2, read_lines, read_line_blocks, "template"),
