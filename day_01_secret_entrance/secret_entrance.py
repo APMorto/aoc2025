@@ -17,8 +17,27 @@ def part1(lines):
             out += 1
     return out
 
-def part2(_):
-    pass
+def part2(lines):
+    MOD = 100
+    # How many rotations until it points to 0?
+    cur = 50
+    out = 0
+    for i, line in enumerate(lines):
+        #print("line", line)
+        mult = -1 if line[0] == 'L' else 1
+        amt = int(line[1:])
+        for _ in range(amt):
+            cur = (cur + mult) % MOD
+            if cur == 0:
+                out += 1
+        # new = (cur + mult * amt)
+        # if ((mult == 1 and new >= MOD) or (mult == -1 and new <= 0)) and (cur != 0):
+        #     #print("incremented")
+        #     out += 1
+        # out += max(0, amt // MOD - 1)
+        #print("cur -> new", cur, new)
+        # cur = new % MOD
+    return out
 
 
 if __name__ == '__main__':
