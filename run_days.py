@@ -5,11 +5,12 @@ from util.timer import get_results
 from parser.parser import read_grid, read_list_grid, read_line, read_line_blocks, read_lines
 
 import template.template
+import day_01_secret_entrance.secret_entrance as day_01
 
 day_information = {
 # # DAY: (p1, p2, input_fn, [input_fn2], "dir")
-    0: (template.template.part1, template.template.part2, read_lines, read_line_blocks, "template"),
-
+    #0: (template.template.part1, template.template.part2, read_lines, read_line_blocks, "template"),
+    1: (day_01.part1, day_01.part2, read_lines, "day_01_secret_entrance")
 }
 
 

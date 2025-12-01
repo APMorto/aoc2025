@@ -6,10 +6,9 @@ from typing import List
 def part1(lines):
     # L lower, R higher
     MOD = 100
-    # How many rotations until it points to 0?
     cur = 50
     out = 0
-    for i, line in enumerate(lines):
+    for line in lines:
         mult = -1 if line[0] == 'L' else 1
         amt = int(line[1:])
         cur = (cur + mult * amt) % MOD
@@ -19,16 +18,15 @@ def part1(lines):
 
 def part2(lines):
     MOD = 100
-    # How many rotations until it points to 0?
     cur = 50
     out = 0
-    for i, line in enumerate(lines):
+    for line in lines:
         mult = -1 if line[0] == 'L' else 1
         amt = int(line[1:])
         amt_ = amt % MOD
         extras = amt // MOD
         new = (cur + mult * amt_)
-        if ((mult == 1 and new >= MOD) or (mult == -1 and new <= 0)) and (cur != 0):
+        if ((mult == 1 and new >= MOD) or (mult == -1 and new <= 0)) and cur != 0:
             out += 1
         out += extras
         cur = new % MOD
