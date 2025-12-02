@@ -14,19 +14,33 @@ def part1(line):
     print(len(ranges))
     print("ranges", ranges)
     out = 0
+    seen = set()
     for id in range(1, highest):
         sid = str(id)
+        for amt in range(2, 100):
+            sxid = sid * amt
+            xid = int(sxid)
+            if xid > highest:
+                break
+
+            for l, r in ranges:
+                if l <= xid <= r:
+                    if xid not in seen:
+                        seen.add(xid)
+                        out += xid
+
         s2id = sid + sid
         id2 = int(s2id)
         if id2 > highest:
             break
-        for l, r in ranges:
-            if l <= id2 <= r:
-                out += id2
+        # for l, r in ranges:
+        #     if l <= id2 <= r:
+        #         out += id2
     return out
 
 def part2(lines):
-    print("lines", lines)
+    # print("lines", lines)
+    return part1(lines)
     pass
 
 
@@ -34,5 +48,5 @@ if __name__ == '__main__':
     get_results("P1 Example", part1, read_line, "example.txt", expected=1227775554)
     get_results("P1", part1, read_line, "input.txt")
 
-    get_results("P2 Example", part2, read_line, "example.txt")
+    get_results("P2 Example", part2, read_line, "example.txt", expected=4174379265)
     get_results("P2", part2, read_line, "input.txt")
