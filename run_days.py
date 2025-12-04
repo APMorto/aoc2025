@@ -8,6 +8,7 @@ import template.template
 import day_01_secret_entrance.secret_entrance as    day_01
 import day_02_gift_shop.gift_shop as                day_02
 import day_03_lobby.joltages as                     day_03
+import day_04_printing_department.forklift_grid as  day_04
 
 day_information = {
 # # DAY: (p1, p2, input_fn, [input_fn2], "dir")
@@ -15,6 +16,7 @@ day_information = {
     1: (day_01.part1, day_01.part2, read_lines, "day_01_secret_entrance"),
     2: (day_02.part1, day_02.part2, read_line, "day_02_gift_shop"),
     3: (day_03.part1, day_03.part2, read_lines, "day_03_lobby"),
+    4: (day_04.part1, day_04.part2, read_lines, read_list_grid, "day_04_printing_department"),
 }
 
 
