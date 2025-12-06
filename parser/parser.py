@@ -12,6 +12,10 @@ def read_grid(fp: str) -> List[str]:
 def read_lines(fp: str) -> List[str]:
     return read_grid(fp)
 
+def read_lines_literal(fp: str):
+    with open(fp) as f:
+        return list(line for line in f.readlines())
+
 def read_list_grid(fp: str) -> List[List[str]]:
     with open(fp, 'r') as f:
         lines = f.readlines()
