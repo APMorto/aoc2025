@@ -12,7 +12,8 @@ def read_grid(fp: str) -> List[str]:
 def read_lines(fp: str) -> List[str]:
     return read_grid(fp)
 
-def read_lines_literal(fp: str):
+def read_lines_literal(fp: str) -> List[str]:
+    """Doesn't strip the lines."""
     with open(fp) as f:
         return list(line for line in f.readlines())
 

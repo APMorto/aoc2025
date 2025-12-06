@@ -25,9 +25,7 @@ def part1(lines):
 def part2(lines):
     longest_line = max(map(len, lines))
     lines = [line + " " * (longest_line - len(line)) for line in lines]
-    print("lines", lines)
     transpose_str = list("".join(row) for row in zip(*lines))
-    print(transpose_str)
     problems = []
     problem = []
     for row in transpose_str:
@@ -48,7 +46,6 @@ def part2(lines):
             else:
                 s = row.strip()
             nums.append(int(s))
-        print(nums)
         if problem[0][-1] == '+':
             out += sum(nums)
         else:
@@ -61,8 +58,8 @@ def part2(lines):
 
 
 if __name__ == '__main__':
-    get_results("P1 Example", part1, read_lines, "example.txt", expected=None)
-    get_results("P1", part1, read_lines, "input.txt")
+    get_results("P1 Example", part1, read_lines, "example.txt", expected=4277556)
+    get_results("P1", part1, read_lines, "input.txt", expected=5060053676136)
 
     get_results("P2 Example", part2, read_lines_literal, "example.txt", expected=3263827)
-    get_results("P2", part2, read_lines_literal, "input.txt")
+    get_results("P2", part2, read_lines_literal, "input.txt", expected=9695042567249)
