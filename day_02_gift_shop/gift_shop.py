@@ -55,7 +55,7 @@ def part2(line):
         l, r = int(l), int(r)
         ranges.append((l, r))
     ranges.sort()   # Non-overlapping.
-    print("ranges", ranges)
+    #print("ranges", ranges)
     #check_interval_overlap(ranges)
     highest = max(r for l, r in ranges)
     highest_digits = num_digits(highest)
@@ -115,7 +115,7 @@ def part2(line):
     #     if amt == 2:    # Ugly way to do this, just with sloppy loop leftover, but it works.
     #         break
 
-    print("len(seen)", len(seen))
+    #print("len(seen)", len(seen))
     return out
 
 
