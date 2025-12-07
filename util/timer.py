@@ -1,4 +1,5 @@
 import timeit
+from typing import Optional
 
 
 def time_with_output(func):
@@ -17,7 +18,22 @@ def get_results(name, solution, parse_fn, fp, **kwargs):
         print(e)
         return None, 0, 0
 
-    res, elapsed = time_with_output(lambda: solution(input))
+    repetitions: Optional[int] = kwargs.get('repetitions', None)
+    if repetitions is None:
+        res, elapsed = time_with_output(lambda: solution(input))
+    else:
+        results = []
+        elapseds = []
+        for _ in range(repetitions):
+            res, elapsed = time_with_output(lambda: solution(input))
+            results.append(res)
+            elapseds.append(elapsed)
+        assert all(result == results[0] for result in results)
+        total_time = sum(elapseds)
+        average_time = total_time / repetitions
+
+        res, elapsed = results[0], average_time
+
 
     if kwargs.get("dense", False):
         print(f"{name}: {str(res) : >14}, Ex: {elapsed:.3f}s, Prs: {parse_time:.4f}s")

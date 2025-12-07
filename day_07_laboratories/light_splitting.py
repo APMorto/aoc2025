@@ -13,7 +13,13 @@ def start_pos(grid):
                 return start
     return None
 
+def filter_blank_grid_lines(grid):
+    w = len(grid[0])
+    blank_line = '.' * w
+    return [line for line in grid if line != blank_line]
+
 def part1(grid):
+    grid = filter_blank_grid_lines(grid)    # Slightly faster.
     w = len(grid[0])
     h = len(grid)
     start = start_pos(grid)
@@ -43,6 +49,7 @@ def part1(grid):
 
 
 def part2(grid):
+    grid = filter_blank_grid_lines(grid)    # Slightly faster.
     w = len(grid[0])
     h = len(grid)
     start = start_pos(grid)
@@ -64,7 +71,7 @@ def part2(grid):
 
 if __name__ == '__main__':
     get_results("P1 Example", part1, read_lines, "example.txt", expected=21)
-    get_results("P1", part1, read_lines, "input.txt", expected=1570)
+    get_results("P1", part1, read_lines, "input.txt", expected=1570, repetitions=1000)
 
     get_results("P2 Example", part2, read_lines, "example.txt", expected=40)
-    get_results("P2", part2, read_lines, "input.txt", expected=15118009521693)
+    get_results("P2", part2, read_lines, "input.txt", expected=15118009521693, repetitions=100)
