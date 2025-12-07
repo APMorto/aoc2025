@@ -40,13 +40,34 @@ def part1(grid):
 
 
 
-def part2(lines):
-    pass
+def part2(grid):
+    start = None
+    w = len(grid[0])
+    h = len(grid)
+    for r in range(h):
+        for c in range(w):
+            if grid[r][c] == 'S':
+                start = (r, c)
+    assert start is not None
+    sr, sc = start
+
+    dp = [[0] * w for _ in range(h)]
+    dp[sr][sc] = 1
+
+    for r in range(1, h):
+        for c in range(w):
+            if grid[r][c] == '^':
+                dp[r][c-1] += dp[r-1][c]
+                dp[r][c+1] += dp[r-1][c]
+            else:
+                dp[r][c] += dp[r-1][c]
+    return sum(dp[-1])
+
 
 
 if __name__ == '__main__':
     get_results("P1 Example", part1, read_lines, "example.txt", expected=21)
     get_results("P1", part1, read_lines, "input.txt")
 
-    get_results("P2 Example", part2, read_lines, "example.txt", expected=None)
+    get_results("P2 Example", part2, read_lines, "example.txt", expected=40)
     get_results("P2", part2, read_lines, "input.txt")
