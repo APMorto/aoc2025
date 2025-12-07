@@ -4,7 +4,7 @@ import sys
 from util.timer import get_results
 from parser.parser import read_grid, read_list_grid, read_line, read_line_blocks, read_lines, read_lines_literal
 
-import template.template
+import template.day07
 import day_01_secret_entrance.secret_entrance as    day_01
 import day_02_gift_shop.gift_shop as                day_02
 import day_03_lobby.joltages as                     day_03
