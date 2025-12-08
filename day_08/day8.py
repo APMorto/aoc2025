@@ -41,7 +41,36 @@ def part1(lines):
 
 
 def part2(lines):
-    pass
+    points = []
+    for line in lines:
+        x, y, z = line.split(',')
+        x, y, z = int(x), int(y), int(z)
+        points.append((x, y, z))
+    n = len(points)
+    print(n)
+
+    distances = [(dist(points[i], points[j]), i, j) for i in range(n) for j in range(n) if i != j]
+    distances.sort()
+
+    dsu = DisJointSets(n)
+
+    connections = 0
+    for d, i, j in distances:
+        if not dsu.connected(i, j):
+        #if True:
+            dsu.join(i, j)
+            connections += 1
+            if dsu.componentSize(0) == n:
+                print(i, j)
+                print(points[i], points[j])
+                return points[i][0] * points[j][0]
+            #if connections >= n-1:
+            #    return points[i][0] * points[j][1]
+
+    componentSizes = [dsu.componentSize(root) for root in dsu.componentRoots()]
+    componentSizes.sort(reverse=True)
+    print(componentSizes)
+    #return componentSizes[0] * componentSizes[1] * componentSizes[2]
 
 
 if __name__ == '__main__':
