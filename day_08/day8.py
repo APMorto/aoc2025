@@ -3,6 +3,8 @@ from parser.parser import read_lines, read_line, read_grid, read_list_grid, read
 from typing import List
 from util.datastructures import DisJointSets
 
+import numpy as np
+
 def dist(p1, p2):
     x1, y1, z1 = p1
     x2, y2, z2 = p2
@@ -15,18 +17,19 @@ def part1(lines):
         x, y, z = int(x), int(y), int(z)
         points.append((x, y, z))
     n = len(points)
-    print(n)
-
-    distances = [(dist(points[i], points[j]), i, j) for i in range(n) for j in range(n) if i > j]
-    distances.sort()
-    distances = distances[:1000]
+    points_arr = np.array(points)
+    pairwise_distances = np.linalg.norm(points_arr[:, None, :] - points_arr[None, :, :], axis=2)
+    pairwise_distances[np.tri(n)==1] = np.inf
+    sorted_indices = np.argsort(pairwise_distances.flatten())
+    sorted_indices = sorted_indices[:1000]
 
     dsu = DisJointSets(n)
 
     connections = 0
-    for d, i, j in distances:
+    for idx in sorted_indices:
+        i = idx % n
+        j = idx // n
         if not dsu.connected(i, j):
-        #if True:
             dsu.join(i, j)
             connections += 1
             if connections >= 1000-1:
@@ -34,7 +37,6 @@ def part1(lines):
 
     componentSizes = [dsu.componentSize(root) for root in dsu.componentRoots()]
     componentSizes.sort(reverse=True)
-    print(componentSizes)
     return componentSizes[0] * componentSizes[1] * componentSizes[2]
 
 
@@ -45,13 +47,17 @@ def part2(lines):
         x, y, z = int(x), int(y), int(z)
         points.append((x, y, z))
     n = len(points)
+    points_arr = np.array(points)
+    pairwise_distances = np.linalg.norm(points_arr[:, None, :] - points_arr[None, :, :], axis=2)
+    pairwise_distances[np.tri(n)==1] = np.inf
+    sorted_indices = np.argsort(pairwise_distances.flatten())
 
-    distances = [(dist(points[i], points[j]), i, j) for i in range(n) for j in range(i)]
-    distances.sort()
     dsu = DisJointSets(n)
 
     connections = 0
-    for d, i, j in distances:
+    for idx in sorted_indices:
+        i = idx % n
+        j = idx // n
         if not dsu.connected(i, j):
             dsu.join(i, j)
             connections += 1
