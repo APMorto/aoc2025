@@ -12,6 +12,7 @@ import day_04_printing_department.forklift_grid as  day_04
 import day_05_cafeteria.ranges as                   day_05
 import day_06_trash_compactor.transpose_math as     day_06
 import day_07_laboratories.light_splitting as       day_07
+import day_08_playground.ihatedthisbccantread as    day_08
 
 day_information = {
 # # DAY: (p1, p2, input_fn, [input_fn2], "dir")
@@ -23,6 +24,7 @@ day_information = {
     5: (day_05.part1, day_05.part2, read_line_blocks, "day_05_cafeteria"),
     6: (day_06.part1, day_06.part2, read_lines, read_lines_literal, "day_06_trash_compactor"),
     7: (day_07.part1, day_07.part2, read_lines, "day_07_laboratories"),
+    8: (day_08.part1, day_08.part2, read_lines, "day_08_playground"),
 }
 
 
