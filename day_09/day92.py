@@ -19,7 +19,7 @@ def part1(lines):
         for j in range(i):
             x1, y1 = points[i]
             x2, y2 = points[j]
-            best = max(best, (abs(x1 - x2)+1) * (abs(y1 - y2)+1))
+            best = max(best, (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1))
     return best
 
 
@@ -32,23 +32,24 @@ def part2(lines):
     n = len(points)
     bx = min(x for x, y in points)
     by = min(y for x, y in points)
-    #print(bx, by)
-    #points = [(x-bx, y-by) for x, y in points]
-    #print(points)
+    # print(bx, by)
+    # points = [(x-bx, y-by) for x, y in points]
+    # print(points)
 
     uniqueX = sorted(set(x for x, y in points))
     uniqueY = sorted(set(y for x, y in points))
     xMap = {x: i for i, x in enumerate(uniqueX)}
     yMap = {y: i for i, y in enumerate(uniqueY)}
+
     def map(p):
         r, c = p
         return xMap[r], yMap[c]
-
 
     fromLeft = defaultdict(lambda: math.inf)
     fromRight = defaultdict(lambda: -math.inf)
     fromTop = defaultdict(lambda: math.inf)
     fromBottom = defaultdict(lambda: -math.inf)
+
     def updateBounds(r, c):
         fromLeft[r] = min(fromLeft[r], c)
         fromRight[r] = max(fromRight[r], c)
@@ -66,10 +67,6 @@ def part2(lines):
                 updateBounds(rr, c)
         prevR, prevC = r, c
 
-
-
-
-
     best = 0
     for i in range(n):
         for j in range(i):
@@ -79,7 +76,6 @@ def part2(lines):
             r2, c2 = points[j]
             r1, c1 = map((r1, c1))
             r2, c2 = map((r2, c2))
-
 
             xmin, xmax = min(x1, x2), max(x1, x2)
             ymin, ymax = min(y1, y2), max(y1, y2)
@@ -96,24 +92,17 @@ def part2(lines):
                             valid = False
                         if fromBottom[cc] < max(r1, r2):
                             valid = False
-                    for rr in range(min(r1, r2), max(r1, r2)+1):
+                    for rr in range(min(r1, r2), max(r1, r2) + 1):
                         if fromLeft[rr] > min(c1, c2):
                             valid = False
                         if fromRight[rr] < max(c1, c2):
                             valid = False
                     if not valid:
                         break
-                    #elif (xmin <= x3 <= xmax and ymin <= y3 <= ymax):
-                        # On boundary.
-                        # Its on some side.
-                        # we make some turn
-                        #
 
             if valid:
-                #print(x1, y1, x2, y2, (abs(x1 - x2)+1) * (abs(y1 - y2)+1))
-                best = max(best, (abs(x1 - x2)+1) * (abs(y1 - y2)+1))
+                best = max(best, (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1))
     return best
-
 
 
 if __name__ == '__main__':
