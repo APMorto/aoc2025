@@ -70,14 +70,12 @@ def part2(lines):
 
         return outNeither, outDac, outFft, outBoth
 
-    print(waysTo('out'))
     return waysTo('out')[3]
 
 
-
 if __name__ == '__main__':
-    get_results("P1 Example", part1, read_lines, "example.txt", expected=5)
-    get_results("P1", part1, read_lines, "input.txt")
+    get_results("P1 Example", part1, read_lines, "example_p1.txt", expected=5)
+    get_results("P1", part1, read_lines, "input.txt", expected=613)
 
-    get_results("P2 Example", part2, read_lines, "example.txt", expected=None)
-    get_results("P2", part2, read_lines, "input.txt")
+    get_results("P2 Example", part2, read_lines, "example_p2.txt", expected=2)
+    get_results("P2", part2, read_lines, "input.txt", expected=372918445876116)

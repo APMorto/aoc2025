@@ -15,6 +15,8 @@ import day_07_laboratories.light_splitting as       day_07
 import day_08_playground.ihatedthisbccantread as    day_08
 import day_09_movie_theater.shape as                day_09
 
+import day_11_reactor.cable_paths as                day_11
+
 day_information = {
 # # DAY: (p1, p2, input_fn, [input_fn2], "dir")
     #0: (template.template.part1, template.template.part2, read_lines, read_line_blocks, "template"),
@@ -27,6 +29,8 @@ day_information = {
     7: (day_07.part1, day_07.part2, read_lines, "day_07_laboratories"),
     8: (day_08.part1, day_08.part2, read_lines, "day_08_playground"),
     9: (day_09.part1, day_09.part2, read_lines, "day_09_movie_theater"),
+
+    11: (day_11.part1, day_11.part2, read_lines, "day_11_reactor"),
 }
 
 
