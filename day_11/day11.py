@@ -31,7 +31,48 @@ def part1(lines):
 
 
 def part2(lines):
-    pass
+    g = {}
+    for line in lines:
+        src, dests = line.split(':')
+        dests  = dests.strip().split()
+        g[src] = list(dests)
+
+    reversedG = defaultdict(list)
+    for src, dests in g.items():
+        for dest in dests:
+            reversedG[dest].append(src)
+
+    @cache
+    def waysTo(dest):
+        if dest == 'svr':
+            return 1, 0, 0, 0
+        outNeither = 0
+        outDac = 0
+        outFft = 0
+        outBoth = 0
+        for src in reversedG[dest]:
+            subNeither, subDac, subFft, subBoth = waysTo(src)
+            if src == 'dac':
+                outDac += subNeither
+                outDac += subDac
+                outBoth += subFft
+                outBoth += subBoth
+            elif src == 'fft':
+                outFft += subNeither
+                outFft += subFft
+                outBoth += subBoth
+                outBoth += subDac
+            else:
+                outNeither += subNeither
+                outBoth += subBoth
+                outDac += subDac
+                outFft += subFft
+
+        return outNeither, outDac, outFft, outBoth
+
+    print(waysTo('out'))
+    return waysTo('out')[3]
+
 
 
 if __name__ == '__main__':
