@@ -16,6 +16,7 @@ import day_08_playground.ihatedthisbccantread as    day_08
 import day_09_movie_theater.shape as                day_09
 
 import day_11_reactor.cable_paths as                day_11
+import day_12_christmas_tree_farm.fake_puzzle as    day_12
 
 day_information = {
 # # DAY: (p1, p2, input_fn, [input_fn2], "dir")
@@ -31,6 +32,7 @@ day_information = {
     9: (day_09.part1, day_09.part2, read_lines, "day_09_movie_theater"),
 
     11: (day_11.part1, day_11.part2, read_lines, "day_11_reactor"),
+    12: (day_12.part1_heuristic, None, read_line_blocks, "day_12_christmas_tree_farm"),
 }
 
 
