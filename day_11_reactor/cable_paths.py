@@ -70,6 +70,24 @@ def part2(lines):
 
         return outNeither, outDac, outFft, outBoth
 
+    # This is slower in run_days (0.011s vs 0.08s), but faster in this file. Keep it just to denote the attempt.
+    # @cache
+    # def waysToClean(dest):
+    #     if dest == 'svr':
+    #         return 1, 0, 0, 0
+    #     out = [0] * 4
+    #     for src in reversedG[dest]:
+    #         subAnswer = waysToClean(src)
+    #         newlySeen = 0
+    #         if src == 'dac':
+    #             newlySeen = 1 << 0
+    #         elif src == 'fft':
+    #             newlySeen = 1 << 1
+    #         for i, ans in enumerate(subAnswer):
+    #             out[i | newlySeen] += ans
+
+        return out
+
     return waysTo('out')[3]
 
 
@@ -78,4 +96,4 @@ if __name__ == '__main__':
     get_results("P1", part1, read_lines, "input.txt", expected=613)
 
     get_results("P2 Example", part2, read_lines, "example_p2.txt", expected=2)
-    get_results("P2", part2, read_lines, "input.txt", expected=372918445876116)
+    get_results("P2", part2, read_lines, "input.txt", expected=372918445876116, repetitions=100)
