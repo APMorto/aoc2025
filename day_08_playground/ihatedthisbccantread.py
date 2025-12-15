@@ -64,11 +64,48 @@ def part2(lines):
             if connections >= n-1:
                 return points[i][0] * points[j][0]
 
+def both_parts(lines):
+    points = []
+    for line in lines:
+        x, y, z = line.split(',')
+        x, y, z = int(x), int(y), int(z)
+        points.append((x, y, z))
+    n = len(points)
+    points_arr = np.array(points)
+    pairwise_distances = np.linalg.norm(points_arr[:, None, :] - points_arr[None, :, :], axis=2)
+    pairwise_distances[np.tri(n)==1] = np.inf
+    sorted_indices = np.argsort(pairwise_distances.flatten())
+    # sorted_indices = sorted_indices[:1000]
+
+    dsu = DisJointSets(n)
+
+    answer1 = None
+    answer2 = None
+
+    connections = 0
+    for it, idx in enumerate(sorted_indices):
+        i = idx % n
+        j = idx // n
+        if not dsu.connected(i, j):
+            dsu.join(i, j)
+            connections += 1
+            if answer1 is None and it >= 1000-1:
+                componentSizes = [dsu.componentSize(root) for root in dsu.componentRoots()]
+                componentSizes.sort(reverse=True)
+                answer1 = componentSizes[0] * componentSizes[1] * componentSizes[2]
+
+            if connections >= n-1:
+                answer2 = points[i][0] * points[j][0]
+                break
+    return answer1, answer2
+
 
 
 if __name__ == '__main__':
     #get_results("P1 Example", part1, read_lines, "example.txt", expected=40)
-    get_results("P1", part1, read_lines, "input.txt")
+    get_results("P1", part1, read_lines, "input.txt", expected=123930)
 
     get_results("P2 Example", part2, read_lines, "example.txt", expected=25272)
     get_results("P2", part2, read_lines, "input.txt", expected=27338688)
+
+    get_results("P1&2", both_parts, read_lines, "input.txt", expected=(123930, 27338688))

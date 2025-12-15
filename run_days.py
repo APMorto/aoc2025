@@ -28,7 +28,8 @@ day_information = {
     5: (day_05.part1, day_05.part2, read_line_blocks, "day_05_cafeteria"),
     6: (day_06.part1, day_06.part2, read_lines, read_lines_literal, "day_06_trash_compactor"),
     7: (day_07.part1, day_07.part2, read_lines, "day_07_laboratories"),
-    8: (day_08.part1, day_08.part2, read_lines, "day_08_playground"),
+    # 8: (day_08.part1, day_08.part2, read_lines, "day_08_playground"),
+    8: (day_08.both_parts, day_08.both_parts, read_lines, "day_08_playground"),
     9: (day_09.part1, day_09.part2, read_lines, "day_09_movie_theater"),
 
     11: (day_11.part1, day_11.part2, read_lines, "day_11_reactor"),
