@@ -66,6 +66,13 @@ def part2(lines):
         prevR, prevC = r, c
 
     best = 0
+    # This was slower. I think because then were sorting lots of elements.
+    # def area(x1, y1, x2, y2):
+    #     return (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1)
+    # ijs = list((i, j) for i in range(n) for j in range(i))
+    # ijs.sort(key=lambda ij: area(*points[ij[0]], *points[ij[1]]), reverse=True)
+    # if True:
+    #     for i, j in ijs:
     for i in range(n):
         for j in range(i):
             x1, y1 = points[i]
