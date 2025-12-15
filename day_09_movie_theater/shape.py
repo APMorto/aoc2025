@@ -42,10 +42,11 @@ def part2(lines):
         return xMap[r], yMap[c]
 
     # Under the assumption that the shape is concave, we may simply check the rays going in from the outside.
-    fromLeft = defaultdict(lambda: math.inf)
-    fromRight = defaultdict(lambda: -math.inf)
-    fromTop = defaultdict(lambda: math.inf)
-    fromBottom = defaultdict(lambda: -math.inf)
+    fromLeft = [math.inf] * len(yMap)
+    fromRight = [-math.inf] * len(yMap)
+    fromTop = [math.inf] * len(xMap)
+    fromBottom = [-math.inf] * len(xMap)
+
 
     def updateBounds(r, c):
         fromLeft[r] = min(fromLeft[r], c)
@@ -53,7 +54,7 @@ def part2(lines):
         fromTop[c] = min(fromTop[c], r)
         fromBottom[c] = max(fromBottom[c], r)
 
-    prevR, prevC = points[-1]
+    prevR, prevC = compressionMap(points[-1])
     for p in points:
         r, c = compressionMap(p)
         if prevR == r:
@@ -69,6 +70,9 @@ def part2(lines):
         for j in range(i):
             x1, y1 = points[i]
             x2, y2 = points[j]
+            area = (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1)
+            if area <= best:
+                continue
             r1, c1 = compressionMap(points[i])
             r2, c2 = compressionMap(points[j])
             rmin, rmax = min(r1, r2), max(r1, r2)
@@ -104,7 +108,7 @@ def part2(lines):
                     break
 
             if valid:
-                best = max(best, (abs(x1 - x2) + 1) * (abs(y1 - y2) + 1))
+                best = max(best, area)
     return best
 
 
